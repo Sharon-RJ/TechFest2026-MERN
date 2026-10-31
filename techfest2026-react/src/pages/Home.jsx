@@ -29,7 +29,8 @@ function Home() {
         <div className="hero-content">
 
           <p className="hero-label">
-  TECHFEST 2026 - NATIONAL LEVEL
+<p className="hero-label">
+  TECHFEST 2026 - NATIONAL LEVEL INNOVATION
 </p>
 
           <h1>
