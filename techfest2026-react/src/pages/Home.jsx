@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -27,11 +28,9 @@ function Home() {
       {/* HERO SECTION */}
       <section className="hero-section">
         <div className="hero-content">
-
           <p className="hero-label">
-<p className="hero-label">
-  TECHFEST 2026 - NATIONAL LEVEL INNOVATION
-</p>
+            TECHFEST 2026 - NATIONAL LEVEL INNOVATION
+          </p>
 
           <h1>
             Technology. Innovation.<br />
@@ -53,20 +52,15 @@ function Home() {
               Register Now
             </Link>
           </div>
-
         </div>
       </section>
 
-
       {/* ABOUT SECTION */}
       <section className="section">
-
         <div className="section-heading">
           <p className="small-heading">ABOUT TECHFEST</p>
 
-          <h2>
-            A platform for ideas and innovation
-          </h2>
+          <h2>A platform for ideas and innovation</h2>
 
           <p>
             TechFest 2026 provides students with an opportunity to
@@ -76,7 +70,6 @@ function Home() {
         </div>
 
         <div className="feature-grid">
-
           <div className="feature-box">
             <h3>Technical Events</h3>
             <p>
@@ -100,15 +93,11 @@ function Home() {
               creativity and campus activities.
             </p>
           </div>
-
         </div>
-
       </section>
-
 
       {/* HIGHLIGHTS */}
       <section className="highlight-section">
-
         <div>
           <span>05</span>
           <p>Events</p>
@@ -128,42 +117,26 @@ function Home() {
           <span>2026</span>
           <p>Edition</p>
         </div>
-
       </section>
 
-
-      {/* API REQUIREMENT - SMALL, NOT A HUGE PANEL */}
+      {/* API REQUIREMENT */}
       <section className="update-section">
-
         <div>
-          <p className="small-heading">
-            LATEST NOTICE
-          </p>
+          <p className="small-heading">LATEST NOTICE</p>
 
-          {loading && (
-            <p>Loading latest update...</p>
-          )}
+          {loading && <p>Loading latest update...</p>}
 
-          {error && (
-            <p>{error}</p>
-          )}
+          {error && <p>{error}</p>}
 
           {apiData && !loading && !error && (
-            <p>
-              TechFest updates are being loaded successfully.
-            </p>
+            <p>TechFest updates are being loaded successfully.</p>
           )}
         </div>
-
       </section>
-
 
       {/* CTA */}
       <section className="cta-section">
-
-        <h2>
-          Ready to take part?
-        </h2>
+        <h2>Ready to take part?</h2>
 
         <p>
           Explore the events and find something that interests you.
@@ -172,9 +145,7 @@ function Home() {
         <Link to="/events" className="primary-button">
           View All Events
         </Link>
-
       </section>
-
     </div>
   );
 }
