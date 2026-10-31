@@ -2,22 +2,17 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
-// Verify JWT token
+// Verify JWT token from HttpOnly cookie
 const protect = async (req, res, next) => {
   try {
-    const authHeader = req.headers.authorization;
+    const token = req.cookies?.token;
 
-    if (
-      !authHeader ||
-      !authHeader.startsWith("Bearer ")
-    ) {
+    if (!token) {
       return res.status(401).json({
         success: false,
-        message: "Access denied. No token provided."
+        message: "Access denied. Please log in."
       });
     }
-
-    const token = authHeader.split(" ")[1];
 
     const decoded = jwt.verify(
       token,
@@ -36,12 +31,12 @@ const protect = async (req, res, next) => {
     }
 
     req.user = user;
-
     next();
+
   } catch (error) {
     return res.status(401).json({
       success: false,
-      message: "Invalid or expired token."
+      message: "Invalid or expired session."
     });
   }
 };

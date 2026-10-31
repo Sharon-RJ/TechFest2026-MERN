@@ -1,8 +1,10 @@
-
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../api";
 
 function Registration() {
+  const navigate = useNavigate();
+
   const [events, setEvents] = useState([]);
   const [eventId, setEventId] = useState("");
   const [message, setMessage] = useState("");
@@ -36,11 +38,6 @@ function Registration() {
     e.preventDefault();
     setMessage("");
 
-    if (!localStorage.getItem("token")) {
-      setMessage("Please log in before registering for an event.");
-      return;
-    }
-
     if (!eventId) {
       setMessage("Please select an event.");
       return;
@@ -61,6 +58,11 @@ function Registration() {
 
     } catch (error) {
       console.error("Registration error:", error);
+
+      if (error.response?.status === 401) {
+        navigate("/login");
+        return;
+      }
 
       setMessage(
         error.response?.data?.message ||

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api";
@@ -11,13 +10,6 @@ function EventCard({ event }) {
   const navigate = useNavigate();
 
   const handleRegister = async () => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      navigate("/login");
-      return;
-    }
-
     try {
       setLoading(true);
       setMessage("");
@@ -30,6 +22,11 @@ function EventCard({ event }) {
       setMessage("Registration successful!");
 
     } catch (error) {
+      if (error.response?.status === 401) {
+        navigate("/login");
+        return;
+      }
+
       setMessage(
         error.response?.data?.message ||
         "Registration failed. Please try again."

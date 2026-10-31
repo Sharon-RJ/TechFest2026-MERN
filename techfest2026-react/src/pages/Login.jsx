@@ -32,18 +32,10 @@ function Login() {
 
       const response = await API.post("/auth/login", formData);
 
-      // Store JWT token
-      localStorage.setItem("token", response.data.token);
+      // The backend sets the JWT in an HttpOnly cookie.
+      // Do not store the token in localStorage.
 
-      // Store logged-in user information
-      if (response.data.user) {
-        localStorage.setItem(
-          "user",
-          JSON.stringify(response.data.user)
-        );
-      }
-
-      setMessage("Login successful!");
+      setMessage(response.data.message || "Login successful!");
 
       setTimeout(() => {
         navigate("/events");
