@@ -22,6 +22,7 @@ function Home() {
 
   return (
     <div>
+      {/* Experiment 5: Feature branch demonstration */}
 
       {/* HERO SECTION */}
       <section className="hero-section">
