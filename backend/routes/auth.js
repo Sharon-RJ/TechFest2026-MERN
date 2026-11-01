@@ -78,16 +78,32 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   if (
-    typeof email !== "string" ||
-    typeof password !== "string" ||
-    !email.trim() ||
-    !password
-  ) {
-    return res.status(400).json({
-      success: false,
-      message: "Email and password are required"
-    });
-  }
+  typeof email !== "string" ||
+  typeof password !== "string" ||
+  !email.trim() ||
+  !password
+) {
+  return res.status(400).json({
+    success: false,
+    message: "Email and password are required"
+  });
+}
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if (!emailRegex.test(email.trim())) {
+  return res.status(400).json({
+    success: false,
+    message: "Invalid email address"
+  });
+}
+
+if (password.length < 6 || password.length > 72) {
+  return res.status(400).json({
+    success: false,
+    message: "Password must contain 6 to 72 characters"
+  });
+}
 
   const normalizedEmail = email.trim().toLowerCase();
 
