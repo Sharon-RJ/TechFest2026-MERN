@@ -1,4 +1,3 @@
-
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -67,7 +66,6 @@ router.post(
   async (req, res) => {
     try {
       const { name, email, password } = req.body;
-
       const normalizedEmail = email.toLowerCase();
 
       const existingUser = await User.findOne({
@@ -125,14 +123,13 @@ router.post(
     body("password")
       .isString()
       .withMessage("Password must be text")
-      .notEmpty()
-      .withMessage("Password is required")
+      .isLength({ min: 6, max: 72 })
+      .withMessage("Password must contain 6 to 72 characters")
   ],
   checkValidation,
   async (req, res) => {
     try {
       const { email, password } = req.body;
-
       const normalizedEmail = email.toLowerCase();
 
       const user = await User.findOne({
@@ -173,7 +170,6 @@ router.post(
         }
       );
 
-      // Store JWT in an HttpOnly cookie
       res.cookie("token", token, cookieOptions);
 
       res.status(200).json({
